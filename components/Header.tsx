@@ -25,12 +25,12 @@ const Header = () => {
 
   return (
     <header className="flex flex-wrap justify-between items-center px-4 py-2">
-      <div className="flex w-full flex-wrap justify-between items-center">
+      <div className="flex w-full flex-wrap justify-between items-center gap-4">
         <Link
           href="/"
           className="text-2xl font-bold text-blue-500 hover:opacity-50 cursor-pointer mx-auto sm:mx-0"
         >
-          Shopr
+          E-Shop
         </Link>
         <Form
           action="/search"
