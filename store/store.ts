@@ -35,7 +35,7 @@ const useBasketStore = create<IBasketState>()(
               ),
             };
           } else {
-            return { item: [...state.items, { product, quantity: 1 }] };
+            return { items: [...state.items, { product, quantity: 1 }] };
           }
         }),
       removeItem: (productId) =>

@@ -4,4 +4,4 @@ export const COUPON_CODES = {
   NYE2024: 'NYE2024',
 };
 
-export type CouponCode = keyof typeof COUPON_CODES;
+export type TCouponCode = keyof typeof COUPON_CODES;

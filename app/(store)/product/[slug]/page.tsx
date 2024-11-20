@@ -1,7 +1,9 @@
+import AddToBasketButton from '@/components/AddToBasketButton';
 import { imageUrl } from '@/lib/imageUrl';
 import { getProductBySlug } from '@/sanity/lib/products/getProductBySlug';
 import { PortableText } from 'next-sanity';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 interface IProductPageProps {
@@ -48,6 +50,12 @@ const ProductPage = async ({ params }: IProductPageProps) => {
                 <PortableText value={product.description} />
               )}
             </div>
+          </div>
+          <div className="mt-6">
+            <AddToBasketButton product={product} disabled={isOutOfStock} />
+          </div>
+          <div className="flex items-center justify-center bg-blue-500 mx-auto text-white rounded py-2 px-4 mt-4">
+            <Link href="/basket">Go to my Basket</Link>
           </div>
         </div>
       </div>
