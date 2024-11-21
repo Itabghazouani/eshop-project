@@ -1,6 +1,6 @@
 export const formatCurrency = (
   amount: number,
-  currencyCode: string = 'GBP',
+  currencyCode: string = 'EUR',
 ): string => {
   try {
     return new Intl.NumberFormat('en-GB', {

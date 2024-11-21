@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Studio for E-shop',
+  title: 'Studio for SecondLife',
   description: 'E-shop Studio Sanity',
 };
 

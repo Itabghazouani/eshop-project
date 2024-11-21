@@ -16,9 +16,10 @@ export type TGroupedBasketItem = {
   quantity: number;
 };
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl =
+  process.env.NODE_ENV === 'production'
+    ? `https://${process.env.VERCEL_URL}`
+    : process.env.NEXT_PUBLIC_BASE_URL;
 
 export const createCheckoutSession = async (
   items: TGroupedBasketItem[],
@@ -52,7 +53,7 @@ export const createCheckoutSession = async (
       cancel_url: `${baseUrl}/basket`,
       line_items: items.map((item) => ({
         price_data: {
-          currency: 'gbp',
+          currency: 'eur',
           unit_amount: Math.round(item.product.price! * 100),
           product_data: {
             name: item.product.name || 'Unnamed product',

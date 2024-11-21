@@ -11,9 +11,18 @@ interface IProductPageProps {
     slug: string;
   }>;
 }
+
+export const dynamic = 'force-static';
+export const revalidate = 60;
+
 const ProductPage = async ({ params }: IProductPageProps) => {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
+
+  console.log(
+    crypto.randomUUID().slice(0, 5) +
+      `>>> Rerendered the product cache for ${slug}`,
+  );
 
   if (!product) return notFound();
 
@@ -43,7 +52,7 @@ const ProductPage = async ({ params }: IProductPageProps) => {
           <div>
             <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
             <div className="text-xl font-semibold mb-4">
-              £{product.price?.toFixed(2)}
+              €{product.price?.toFixed(2)}
             </div>
             <div className="prose max-w-none mb-6">
               {Array.isArray(product.description) && (
@@ -54,7 +63,7 @@ const ProductPage = async ({ params }: IProductPageProps) => {
           <div className="mt-6">
             <AddToBasketButton product={product} disabled={isOutOfStock} />
           </div>
-          <div className="flex items-center justify-center bg-blue-500 mx-auto text-white rounded py-2 px-4 mt-4">
+          <div className="flex items-center justify-center bg-blue-500 mx-auto text-white rounded py-2 px-4 mt-4 md:mt-5">
             <Link href="/basket">Go to my Basket</Link>
           </div>
         </div>

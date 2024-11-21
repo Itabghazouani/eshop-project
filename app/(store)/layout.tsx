@@ -4,6 +4,9 @@ import '../globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
 import Header from '@/components/Header';
 import { SanityLive } from '@/sanity/lib/live';
+import { draftMode } from 'next/headers';
+import DisableDraftModeButton from '@/components/DisableDraftModeButton';
+import { VisualEditing } from 'next-sanity';
 
 const geistSans = localFont({
   src: '../fonts/GeistVF.woff',
@@ -17,11 +20,11 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'E-Shop',
+  title: 'SecondLife',
   description: 'Quality shopping has never been so easy',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -32,6 +35,12 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          {(await draftMode()).isEnabled && (
+            <>
+              <DisableDraftModeButton />
+              <VisualEditing />
+            </>
+          )}
           <main>
             <Header />
             {children}
