@@ -7,9 +7,12 @@ import dayjs from 'dayjs';
 import Stripe from 'stripe';
 
 export const POST = async (req: NextRequest) => {
+  console.log('Webhook received');
   const body = await req.text();
+  console.log('Webhook body:', body);
   const headersList = await headers();
   const signature = headersList.get('stripe-signature');
+  console.log('Stripe signature:', signature);
 
   if (!signature) {
     return NextResponse.json({ error: 'No signature' }, { status: 400 });
@@ -38,6 +41,8 @@ export const POST = async (req: NextRequest) => {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
+    console.log('Checkout session:', session);
+
     try {
       const order = await createOrderInSanity(session);
       console.log('Order created in sanity', order);
